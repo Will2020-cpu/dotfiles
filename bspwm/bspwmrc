@@ -1,0 +1,40 @@
+#! /bin/sh
+#_______MATANDO SERVICIOS________
+pgrep -x sxhkd > /dev/null || sxhkd &
+$HOME/.config/polybar/launch.sh &
+$HOME/.scripts/inicial.sh &
+$HOME/.scripts/lockscreen.sh &
+feh --bg-fill ~/.config/.wallpapers/estrellas.jpg &
+picom &
+flameshot &
+
+#_________ CONFIGURACION DE MONITORES ______
+bspc monitor -d 1 2 3 4 5
+
+#__________ BORDES, COLORES Y REGLAS _______________
+bspc config split_ratio             0.5
+bspc config borderless_monocle      false
+bspc config gapless_monocle         false
+bspc config focus_follows_pointer   true
+bspc config window_gap              5
+bspc config focus_follows_pointer   true
+bspc config center_pseudo_tiled     true
+bspc config single_monocle	    true
+bspc config bottom_padding          8
+
+
+#_________ REGLAS DE COMPORTAMIENTO DE VENTANAS________
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a Chromium desktop='^2' follow=on focus=on
+bspc rule -a firefox desktop='^2' follow=on focus=on
+bspc rule -a mplayer2 state=floating 
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+
+
+
+export BROWSER=google-chrome-stable
+export TERMINAL=tilix
+export EDITOR=neovim
+export FILE_MANAGER=pcmanfm
+
